@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+  docker-user:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+      args:
+        USER_ID: ${USER_ID}
+        GROUP_ID: ${GROUP_ID}
+    image: docker-user
+    sysctls:
+      - net.ipv4.ip_unprivileged_port_start=0
+    ports:
+      - 8081:80
+    volumes:
+      - ./www:/var/www/html
